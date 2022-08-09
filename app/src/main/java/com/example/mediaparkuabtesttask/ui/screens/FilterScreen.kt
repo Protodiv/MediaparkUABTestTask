@@ -35,14 +35,14 @@ fun FilterScreen(
     navController: NavController,
     viewModel: MainViewModel
 ) {
-    val FilterSaver = run {
+    val MyFilterSaver = run {
         val dateFrom = "dateFrom"
         val dateTo = "dateTo"
         val searchIn = "searchIn"
         mapSaver(
             save = {
                 mapOf(
-                    dateFrom to it.dateFrom,
+                    dateFrom to (it.dateFrom ?: LocalDate.now()),
                     dateTo to it.dateTo,
                     searchIn to it.searchIn,
                 )
@@ -61,7 +61,7 @@ fun FilterScreen(
         viewModel.getFilterFormat()
     }
 
-    val filter = rememberSaveable(stateSaver = FilterSaver) {
+    val filter = rememberSaveable(stateSaver = MyFilterSaver) {
         mutableStateOf(viewModel.filter)
     }
     val context = LocalContext.current

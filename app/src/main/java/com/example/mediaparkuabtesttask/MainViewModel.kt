@@ -70,12 +70,8 @@ class MainViewModel @Inject constructor(
 
     fun search(searchItem: String) {
         viewModelScope.apply {
-            launch(dispatcher) {
-                manageHistory(searchItem)
-            }
-            launch(dispatcher) {
-                getNewsWithParams(searchItem)
-            }
+            launch(dispatcher) {manageHistory(searchItem)}
+            launch(dispatcher) {getNewsWithParams(searchItem)}
         }
     }
 
