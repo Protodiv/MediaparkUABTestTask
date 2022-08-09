@@ -1,14 +1,20 @@
 package com.example.mediaparkuabtesttask.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import coil.compose.SubcomposeAsyncImage
+import coil.compose.rememberAsyncImagePainter
 import com.example.mediaparkuabtesttask.MainViewModel
 import com.example.mediaparkuabtesttask.ui.screens.screensutils.ScreensUtils.HeaderText
 import com.example.mediaparkuabtesttask.ui.screens.screensutils.ScreensUtils.HeaderWithLogo

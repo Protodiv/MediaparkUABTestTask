@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -16,10 +17,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
+import coil.compose.rememberAsyncImagePainter
 import com.example.domain.models.Article
 import com.example.mediaparkuabtesttask.R
 import com.example.mediaparkuabtesttask.ui.theme.white
-import dev.chrisbanes.accompanist.picasso.PicassoImage
 
 object ScreensUtils {
 
@@ -75,24 +78,18 @@ object ScreensUtils {
                 .then(modifier)
         ) {
             Row {
-//                PicassoImage(
-//                    data = article.image,
-//                    contentDescription = article.description,
-//                    modifier = Modifier
-//                        .width(124.dp)
-//                        .height(108.dp),
-//                    alignment = Alignment.TopStart,
-//                    contentScale = ContentScale.Crop,
-//                )
-//                AsyncImage(
-//                    model = article.image,
-//                    contentDescription = article.description,
-//                    modifier = Modifier
-//                        .width(124.dp)
-//                        .height(108.dp),
-//                    alignment = Alignment.TopStart,
-//                    contentScale = ContentScale.Crop
-//                )
+                SubcomposeAsyncImage(
+                    model = article.image,
+                    loading = {
+                        CircularProgressIndicator()
+                    },
+                    contentDescription = null,
+                    modifier = Modifier
+                        .width(124.dp)
+                        .height(108.dp),
+                    alignment = Alignment.TopStart,
+                    contentScale = ContentScale.Crop
+                )
                 Column(
                     modifier = Modifier
                         .padding(start = 19.dp, top = 15.dp, end = 20.dp)

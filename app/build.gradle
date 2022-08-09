@@ -77,8 +77,7 @@ dependencies {
     implementation project(path: ':data')
     implementation project(path: ':domain')
 
-//    implementation("io.coil-kt:coil-compose:2.1.0")
-    implementation 'dev.chrisbanes.accompanist:accompanist-picasso:0.5.1'
+    implementation("io.coil-kt:coil-compose:2.1.0")
 
     // NAVIGATION
     // Java language implementation

@@ -39,7 +39,7 @@ class MainViewModel @Inject constructor(
         private set
 
     init {
-        getNews()
+//        getNews()
     }
 
     fun changeSelectedValue(newSortedType:String){
