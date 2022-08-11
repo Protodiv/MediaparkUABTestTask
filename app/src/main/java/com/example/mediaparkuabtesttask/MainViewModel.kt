@@ -33,13 +33,15 @@ class MainViewModel @Inject constructor(
     /**
      * Need to ask how it`s works
      */
-    var filtersCount by mutableStateOf(1)
+    var filtersCount by mutableStateOf(
+        news.totalArticles
+    )
         private set
-    var sortCount by mutableStateOf(2)
+    var sortCount by mutableStateOf(0)
         private set
 
     init {
-//        getNews()
+        getNews()
     }
 
     fun changeSelectedValue(newSortedType:String){
@@ -85,6 +87,7 @@ class MainViewModel @Inject constructor(
                 sortby = sortedType,
             )
             news = newsRepository.searchNews(searchParams)
+            filtersCount = news.totalArticles
         }
     }
 

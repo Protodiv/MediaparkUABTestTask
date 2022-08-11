@@ -55,13 +55,37 @@ object SearchScreenUtils {
                     Modifier
                         .align(Alignment.Center)
                 ) {
-                    BadgeBox(
-                        backgroundColor = lightRed,
-                        contentColor = white,
-                        badgeContent = {
-                            Text(text = badgedState.toString())
-                        },
-                    ) {
+                    if(badgedState > 0){
+                        BadgeBox(
+                            backgroundColor = lightRed,
+                            contentColor = white,
+                            badgeContent = {
+                                Text(text = badgedState.toString())
+                            },
+                        ) {
+                            Box(
+                                Modifier
+                                    .align(Alignment.Center)
+                                    .size(heightOfSearchPanel - 16.dp)
+                            ) {
+                                IconButton(
+                                    interactionSource = interactionSource,
+                                    modifier = Modifier
+                                        .align(Alignment.Center)
+                                        .width(20.dp)
+                                        .height(21.dp),
+                                    onClick = {onClickAction.invoke()}
+                                ){
+                                    Icon(
+                                        painter = painterResource(id = icon),
+                                        contentDescription = null,
+                                        tint = tintColor
+                                    )
+                                }
+                            }
+                        }
+                    }
+                    else{
                         Box(
                             Modifier
                                 .align(Alignment.Center)

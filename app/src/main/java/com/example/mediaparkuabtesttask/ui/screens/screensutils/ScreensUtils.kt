@@ -1,8 +1,10 @@
 package com.example.mediaparkuabtesttask.ui.screens.screensutils
 
 //import coil.compose.AsyncImage
+import android.service.autofill.OnClickAction
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
@@ -16,12 +18,16 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Popup
+import androidx.compose.ui.window.PopupProperties
 import androidx.compose.ui.zIndex
 import coil.compose.AsyncImage
 import coil.compose.SubcomposeAsyncImage
 import coil.compose.rememberAsyncImagePainter
 import com.example.domain.models.Article
 import com.example.mediaparkuabtesttask.R
+import com.example.mediaparkuabtesttask.ui.theme.orange
+import com.example.mediaparkuabtesttask.ui.theme.sortLineSaperate
 import com.example.mediaparkuabtesttask.ui.theme.white
 
 object ScreensUtils {
@@ -68,20 +74,26 @@ object ScreensUtils {
     }
 
     @Composable
-    fun NewsBox(article: Article, modifier: Modifier = Modifier) {
+    fun NewsBox(article: Article, modifier: Modifier = Modifier,onClickAction: (String)->Unit) {
         Box(
             Modifier
                 .height(108.dp)
                 .fillMaxWidth()
                 .padding(start = 14.dp, end = 18.dp)
                 .background(white)
+                .clickable {
+                    onClickAction(article.url)
+                }
                 .then(modifier)
         ) {
             Row {
                 SubcomposeAsyncImage(
                     model = article.image,
                     loading = {
-                        CircularProgressIndicator()
+                        CircularProgressIndicator(
+                            color = orange,
+                            modifier = Modifier.align(Alignment.Center).padding(30.dp)
+                        )
                     },
                     contentDescription = null,
                     modifier = Modifier
@@ -112,5 +124,30 @@ object ScreensUtils {
         HeaderText(headerText, Modifier.padding(start = 16.dp))
         Spacer(modifier = Modifier.height(29.dp))
         content.invoke()
+    }
+
+    @Composable
+    fun ErrorWindow(text:String, onClickAction: () -> Unit){
+        Popup(
+            alignment = Alignment.Center,
+        ) {
+            Column(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(20.dp, 20.dp, 20.dp, 20.dp))
+                    .clickable {
+                        onClickAction()
+                    }
+            ) {
+                Column(
+                    modifier = Modifier
+                        .background(white)
+                        .padding(start = 20.dp)
+                ) {
+                    HeaderText(
+                        text = text,
+                    )
+                }
+            }
+        }
     }
 }

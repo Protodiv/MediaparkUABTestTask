@@ -15,7 +15,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.Navigator
 import com.example.mediaparkuabtesttask.MainViewModel
 import com.example.mediaparkuabtesttask.R
 import com.example.mediaparkuabtesttask.ui.screens.screensutils.ScreensUtils
@@ -26,6 +29,8 @@ import com.example.mediaparkuabtesttask.ui.screens.screensutils.SearchScreenUtil
 import com.example.mediaparkuabtesttask.ui.screens.screensutils.SearchScreenUtils.SearchScreenBadgeBox
 import com.example.mediaparkuabtesttask.ui.screens.screensutils.SearchScreenUtils.heightOfSearchPanel
 import com.example.mediaparkuabtesttask.ui.theme.gray
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @ExperimentalMaterialApi
 @Composable
@@ -119,7 +124,12 @@ fun SearchScreen(
             if (isSearched) {
                 HeaderAndContent("${news.totalArticles} news") {
                     news.articles.forEach { article ->
-                        ScreensUtils.NewsBox(article)
+                        ScreensUtils.NewsBox(article){ articleUrl ->
+                            val encodedUrl = URLEncoder.encode(articleUrl, StandardCharsets.UTF_8.toString())
+                            navController.navigate(
+                                Screen.WebViewScreen.route + "/$encodedUrl"
+                            )
+                        }
                         Spacer(modifier = Modifier.height(10.dp))
                     }
                 }

@@ -13,10 +13,11 @@ enum class Screen(
     NewsScreen("news_screen", "News", R.drawable.ic_news),
     SearchScreen("search_screen", "Search",R.drawable.ic_search),
     ProfileScreen("profile_screen", "Profile", R.drawable.ic_profile),
-    MoreScreen("more_screen", "More", R.drawable.ic_profile),
+    MoreScreen("more_screen", "More", R.drawable.ic_more),
 
     FilterScreen("filter_screen", "Filter"),
-    SearchInScreen("searchIn_screen", "SearchIn");
+    SearchInScreen("searchIn_screen", "SearchIn"),
+    WebViewScreen("webView_screen", "WebView");
 
     fun getBottomNavItem(): BottomNavItem? {
         if(icon == null){
